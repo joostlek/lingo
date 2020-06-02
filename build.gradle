@@ -3,6 +3,8 @@ plugins {
     id("java")
 }
 
+apply plugin: 'io.spring.dependency-management'
+
 group = "dev.joostlek"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
