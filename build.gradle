@@ -1,9 +1,11 @@
 plugins {
     id("org.springframework.boot") version "2.3.0.RELEASE"
     id("java")
+    id("org.sonarqube") version "3.0"
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
 
 group = "dev.joostlek"
 version = "0.0.1-SNAPSHOT"
@@ -26,4 +28,32 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+sonarqube {
+    properties {
+        property 'sonar.projectKey', 'joostlek_lingo'
+        property 'sonar.organization', 'joostlek-github'
+        property 'sonar.login', System.getenv('SONAR_TOKEN')
+        property 'sonar.host.url', 'https://sonarcloud.io'
+        property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+        property 'sonar.branch.name', System.getenv('BRANCH')
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        exceptionFormat = 'full'
+    }
 }
