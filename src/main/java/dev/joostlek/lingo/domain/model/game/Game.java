@@ -1,9 +1,9 @@
 package dev.joostlek.lingo.domain.model.game;
 
 import dev.joostlek.lingo.domain.Entity;
+import dev.joostlek.lingo.domain.model.WordLength;
 import dev.joostlek.lingo.domain.model.dictionary.Dictionary;
 import dev.joostlek.lingo.domain.model.dictionary.word.Word;
-import dev.joostlek.lingo.domain.model.WordLength;
 
 import java.util.Set;
 

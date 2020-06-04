@@ -1,7 +1,6 @@
 package dev.joostlek.lingo.domain.model.dictionary.word;
 
 import dev.joostlek.lingo.domain.DomainEvent;
-import dev.joostlek.lingo.domain.model.dictionary.Dictionary;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryId;
 
 import java.util.Date;

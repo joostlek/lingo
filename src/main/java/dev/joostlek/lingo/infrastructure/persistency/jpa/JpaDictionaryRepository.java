@@ -4,8 +4,6 @@ import dev.joostlek.lingo.domain.model.dictionary.Dictionary;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryId;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryRepository;
 
-import java.util.UUID;
-
 public class JpaDictionaryRepository implements DictionaryRepository {
     @Override
     public Dictionary dictionaryOfIdentity(DictionaryId dictionaryId) {

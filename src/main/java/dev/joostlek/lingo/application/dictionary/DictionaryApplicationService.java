@@ -5,7 +5,6 @@ import dev.joostlek.lingo.application.dictionary.commands.NewWordCommand;
 import dev.joostlek.lingo.domain.model.dictionary.Dictionary;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryId;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryRepository;
-import dev.joostlek.lingo.domain.model.dictionary.word.Word;
 import dev.joostlek.lingo.domain.model.dictionary.word.WordRepository;
 
 public class DictionaryApplicationService implements DictionaryService {
