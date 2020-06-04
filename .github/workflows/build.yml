@@ -19,8 +19,8 @@ jobs:
       with:
         java-version: 11
     - name: Extract branch name
-        shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        shell: bash
         id: extract_branch
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
