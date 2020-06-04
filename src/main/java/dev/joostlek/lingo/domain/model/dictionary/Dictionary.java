@@ -64,7 +64,7 @@ public class Dictionary extends Entity {
 
     public void setLanguage(String language) {
         this.assertArgumentNotNull(language, "De taal moet opgegeven worden.");
-        this.assertArgumentIsValidByRegex(language, "[A-Z].*", "De taal moet beginnen met een hoofdletter en mag alleen uit letters bestaan.");
+        this.assertArgumentIsValidByRegex(language, "^[A-Z].*$", "De taal moet beginnen met een hoofdletter en mag alleen uit letters bestaan.");
 
         this.language = language;
     }
