@@ -44,6 +44,7 @@ public class Word extends Entity {
 
     public void setWord(String word) {
         assertArgumentLength(word, 5, 7, "Woord mag niet korter zijn dan 5 en niet langer zijn dan 7 letters.");
+        assertArgumentIsValidByRegex(word, "^[a-z]{5,7}$", "Het woord mag alleen uit kleine letters bestaan.");
 
         this.word = word;
     }
