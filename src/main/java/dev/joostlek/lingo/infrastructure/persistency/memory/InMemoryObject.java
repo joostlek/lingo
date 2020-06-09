@@ -2,6 +2,8 @@ package dev.joostlek.lingo.infrastructure.persistency.memory;
 
 import dev.joostlek.lingo.domain.model.dictionary.Dictionary;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryId;
+import dev.joostlek.lingo.domain.model.game.Game;
+import dev.joostlek.lingo.domain.model.game.GameId;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +14,11 @@ public class InMemoryObject {
 
     private final Map<DictionaryId, Dictionary> dictionaries;
 
+    private final Map<GameId, Game> games;
+
     private InMemoryObject() {
         this.dictionaries = new HashMap<>();
+        this.games = new HashMap<>();
     }
 
     public static InMemoryObject instance() {
@@ -25,5 +30,9 @@ public class InMemoryObject {
 
     public Map<DictionaryId, Dictionary> dictionaries() {
         return dictionaries;
+    }
+
+    public Map<GameId, Game> games() {
+        return games;
     }
 }
