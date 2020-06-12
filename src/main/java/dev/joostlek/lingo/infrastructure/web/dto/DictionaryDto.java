@@ -6,4 +6,5 @@ import lombok.Data;
 public class DictionaryDto {
     private String dictionaryId;
     private String language;
+    private int size;
 }

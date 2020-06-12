@@ -9,6 +9,7 @@ public class DictionaryMappingConfiguration implements MapperConfiguration {
     public void execute(ModelMapper modelMapper) {
         modelMapper.createTypeMap(Dictionary.class, DictionaryDto.class)
                 .addMapping(Dictionary::dictionaryId, DictionaryDto::setDictionaryId)
+                .addMapping(Dictionary::allWords, DictionaryDto::setSize)
                 .addMapping(Dictionary::language, DictionaryDto::setLanguage);
     }
 }

@@ -28,6 +28,7 @@ public class MapperConfigurationInitializer implements CommandLineRunner {
                 new TurnIdMappingConfiguration(),
                 new TurnMappingConfiguration(),
                 new ResultMappingConfiguration(),
+                new DictionarySizeMappingConfiguration(),
         };
         for (MapperConfiguration configuration : mapperConfiguration) {
             configuration.execute(modelMapper);
