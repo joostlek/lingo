@@ -56,4 +56,14 @@ public class GameController {
                 .data(gameSet)
                 .build();
     }
+
+    @GetMapping("/{gameId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response<GameDto> getGameById(@PathVariable String gameId) {
+        Game game = gameQueryService.getGameByGameId(gameId);
+        GameDto gameDto = modelMapper.map(game, GameDto.class);
+        return ResponseBuilder.ok()
+                .data(gameDto)
+                .build();
+    }
 }
