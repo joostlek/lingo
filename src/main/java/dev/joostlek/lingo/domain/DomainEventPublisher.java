@@ -6,11 +6,7 @@ import java.util.List;
 
 public class DomainEventPublisher {
 
-    private static final ThreadLocal<DomainEventPublisher> instance = new ThreadLocal<DomainEventPublisher>() {
-        protected DomainEventPublisher initialValue() {
-            return new DomainEventPublisher();
-        }
-    };
+    private static DomainEventPublisher instance;
 
     private boolean publishing;
 
@@ -25,7 +21,10 @@ public class DomainEventPublisher {
     }
 
     public static DomainEventPublisher instance() {
-        return instance.get();
+        if (instance == null) {
+            instance = new DomainEventPublisher();
+        }
+        return instance;
     }
 
     public <T> void publish(final T aDomainEvent) {
@@ -66,12 +65,13 @@ public class DomainEventPublisher {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> void subscribe(DomainEventSubscriber<T> aSubscriber) {
+    public <T> DomainEventPublisher subscribe(DomainEventSubscriber<T> aSubscriber) {
         if (!this.isPublishing()) {
             this.ensureSubscribersList();
 
             this.subscribers().add(aSubscriber);
         }
+        return this;
     }
 
     @SuppressWarnings("rawtypes")

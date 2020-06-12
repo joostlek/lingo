@@ -1,10 +1,9 @@
 package dev.joostlek.lingo.application.dictionary;
 
-import dev.joostlek.lingo.application.dictionary.commands.CreateDictionaryCommand;
-import dev.joostlek.lingo.application.dictionary.commands.NewWordCommand;
 import dev.joostlek.lingo.domain.model.dictionary.Dictionary;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryId;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryRepository;
+import dev.joostlek.lingo.domain.model.dictionary.word.WordId;
 import dev.joostlek.lingo.domain.model.dictionary.word.WordRepository;
 
 public class DictionaryApplicationService implements DictionaryService {
@@ -20,26 +19,8 @@ public class DictionaryApplicationService implements DictionaryService {
         this.wordRepository = wordRepository;
     }
 
-    public void addWord(NewWordCommand newWordCommand) {
-        this.addWord(newWordCommand.getDictionaryId(), newWordCommand.getWord());
-    }
-
-    public String createDictionary(CreateDictionaryCommand aCommand) {
-        return this.createDictionary(aCommand.getLanguage());
-    }
-
-    public DictionaryRepository dictionaryRepository() {
-        return dictionaryRepository;
-    }
-
-    public WordRepository wordRepository() {
-        return wordRepository;
-    }
-
-    private void addWord(
-            String aDictionaryId,
-            String newWord) {
-
+    @Override
+    public String addWord(String aDictionaryId, String word) {
         DictionaryId dictionaryId = new DictionaryId(aDictionaryId);
 
         Dictionary dictionary = this.dictionaryRepository()
@@ -49,12 +30,16 @@ public class DictionaryApplicationService implements DictionaryService {
             throw new IllegalStateException("Dictionary voor " + dictionaryId.id() + " niet gevonden.");
         }
 
-        dictionary.addWordToDictionary(newWord);
+        WordId wordId = this.wordRepository().nextIdentity();
+
+        dictionary.addWordToDictionary(wordId, word);
 
         this.dictionaryRepository().save(dictionary);
+
+        return wordId.id();
     }
 
-    private String createDictionary(String language) {
+    public String createDictionary(String language) {
         DictionaryId dictionaryId = this.dictionaryRepository().nextIdentity();
 
         Dictionary dictionary = new Dictionary(dictionaryId, language);
@@ -62,5 +47,13 @@ public class DictionaryApplicationService implements DictionaryService {
         this.dictionaryRepository().save(dictionary);
 
         return dictionaryId.id();
+    }
+
+    public DictionaryRepository dictionaryRepository() {
+        return dictionaryRepository;
+    }
+
+    public WordRepository wordRepository() {
+        return wordRepository;
     }
 }

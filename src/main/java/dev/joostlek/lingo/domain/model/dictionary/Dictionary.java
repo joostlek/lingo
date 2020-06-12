@@ -2,13 +2,17 @@ package dev.joostlek.lingo.domain.model.dictionary;
 
 import dev.joostlek.lingo.domain.DomainEventPublisher;
 import dev.joostlek.lingo.domain.Entity;
+import dev.joostlek.lingo.domain.model.WordLength;
 import dev.joostlek.lingo.domain.model.dictionary.word.Word;
+import dev.joostlek.lingo.domain.model.dictionary.word.WordId;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public class Dictionary extends Entity {
 
+    private final Random random = new Random();
     private DictionaryId dictionaryId;
     private Set<Word> words;
     private String language;
@@ -32,8 +36,27 @@ public class Dictionary extends Entity {
         this.setWords(new HashSet<>(0));
     }
 
-    public void addWordToDictionary(String newWord) {
-        Word word = new Word(this.dictionaryId, newWord);
+    // Een draak van een algoritme, maar dit kan altijd nog worden aangepast :)
+    public Word getRandomWord(WordLength wordLength) {
+        int size = words.size();
+        int item = random.nextInt(size);
+        int i = 0;
+        boolean pickNextWord = false;
+        for (Word word : words) {
+            if (i == item || pickNextWord) {
+                if (word.word().length() == wordLength.getLength()) {
+                    return word;
+                } else {
+                    pickNextWord = true;
+                }
+            }
+            i++;
+        }
+        return getRandomWord(wordLength);
+    }
+
+    public void addWordToDictionary(WordId wordId, String newWord) {
+        Word word = new Word(wordId, this.dictionaryId, newWord);
         addWord(word);
     }
 

@@ -5,6 +5,7 @@ import dev.joostlek.lingo.application.game.GameService;
 import dev.joostlek.lingo.domain.model.game.Game;
 import dev.joostlek.lingo.infrastructure.web.dto.GameDto;
 import dev.joostlek.lingo.infrastructure.web.requests.CreateGameRequest;
+import dev.joostlek.lingo.infrastructure.web.util.BaseUrl;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/games")
+@RequestMapping(BaseUrl.V1_API + "/games")
 public class GameController {
 
     private final GameService gameService;

@@ -4,9 +4,7 @@ import dev.joostlek.lingo.domain.model.game.GameId;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
 public class GameIdMappingConfiguration implements MapperConfiguration {
     @Override
     public void execute(ModelMapper modelMapper) {

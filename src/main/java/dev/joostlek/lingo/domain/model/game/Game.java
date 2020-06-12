@@ -3,8 +3,11 @@ package dev.joostlek.lingo.domain.model.game;
 import dev.joostlek.lingo.domain.DomainEventPublisher;
 import dev.joostlek.lingo.domain.Entity;
 import dev.joostlek.lingo.domain.model.WordLength;
+import dev.joostlek.lingo.domain.model.dictionary.Dictionary;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryId;
 import dev.joostlek.lingo.domain.model.dictionary.word.Word;
+import dev.joostlek.lingo.domain.model.game.round.Round;
+import dev.joostlek.lingo.domain.model.game.round.RoundId;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -15,19 +18,18 @@ public class Game extends Entity {
 
     private Date createdAt;
 
-    private Set<Turn> turns;
+    private final static int ROUNDS_PER_GAME = 5;
 
     private WordLength wordLength;
 
     private DictionaryId chosenDictionaryId;
-
-    private Word answer;
+    private Set<Round> rounds;
 
     public Game(GameId gameId, WordLength wordLength, DictionaryId chosenDictionaryId) {
         super();
 
         this.createdAt = new Date();
-        this.turns = new HashSet<>();
+        this.rounds = new HashSet<>();
         this.setGameId(gameId);
         this.setWordLength(wordLength);
         this.setChosenDictionaryId(chosenDictionaryId);
@@ -42,6 +44,29 @@ public class Game extends Entity {
                 ));
     }
 
+    public void startRound(RoundId roundId, Dictionary dictionary) {
+        if (!dictionary.dictionaryId().equals(this.chosenDictionaryId())) {
+            throw new IllegalArgumentException("Wrong dictionary was given.");
+        }
+        if (this.rounds().size() > ROUNDS_PER_GAME) {
+            throw new IllegalStateException("Maximum rounds for this game reached.");
+        }
+        if (this.hasActiveRounds()) {
+            throw new IllegalStateException("A round in this game is still active.");
+        }
+        Word answer = dictionary.getRandomWord(this.wordLength());
+        this.rounds.add(new Round(this.gameId(), roundId, answer, this.rounds().size()));
+    }
+
+    public boolean hasActiveRounds() {
+        for (Round round : this.rounds()) {
+            if (round.isActive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public GameId gameId() {
         return gameId;
     }
@@ -50,8 +75,8 @@ public class Game extends Entity {
         return createdAt;
     }
 
-    public Set<Turn> turns() {
-        return turns;
+    public Set<Round> rounds() {
+        return rounds;
     }
 
     public WordLength wordLength() {
@@ -62,26 +87,22 @@ public class Game extends Entity {
         return chosenDictionaryId;
     }
 
-    public Word answer() {
-        return answer;
-    }
-
     public void setGameId(GameId gameId) {
-        assertArgumentNotNull(turns, "De game id moeten worden meegegeven.");
+        assertArgumentNotNull(gameId, "De game id moeten worden meegegeven.");
 
         this.gameId = gameId;
     }
 
     public void setCreatedAt(Date createdAt) {
-        assertArgumentNotNull(turns, "De aanmaakdatum moeten worden meegegeven.");
+        assertArgumentNotNull(createdAt, "De aanmaakdatum moeten worden meegegeven.");
 
         this.createdAt = createdAt;
     }
 
-    public void setTurns(Set<Turn> turns) {
-        assertArgumentNotNull(turns, "De rondes moeten worden meegegeven.");
+    public void setRounds(Set<Round> rounds) {
+        assertArgumentNotNull(rounds, "De rondes moeten worden meegegeven.");
 
-        this.turns = turns;
+        this.rounds = rounds;
     }
 
     public void setWordLength(WordLength wordLength) {
@@ -91,12 +112,8 @@ public class Game extends Entity {
     }
 
     public void setChosenDictionaryId(DictionaryId chosenDictionaryId) {
-        assertArgumentNotNull(wordLength, "De dictionary moet worden meegegeven.");
+        assertArgumentNotNull(chosenDictionaryId, "De dictionary moet worden meegegeven.");
 
         this.chosenDictionaryId = chosenDictionaryId;
-    }
-
-    public void setAnswer(Word answer) {
-        this.answer = answer;
     }
 }

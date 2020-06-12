@@ -3,7 +3,9 @@ package dev.joostlek.lingo.infrastructure.persistency.memory;
 import dev.joostlek.lingo.domain.model.dictionary.Dictionary;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryId;
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryRepository;
+import dev.joostlek.lingo.domain.model.dictionary.word.Word;
 
+import java.util.Collection;
 import java.util.UUID;
 
 public class InMemoryDictionaryRepository implements DictionaryRepository {
@@ -36,6 +38,19 @@ public class InMemoryDictionaryRepository implements DictionaryRepository {
         InMemoryObject.instance()
                 .dictionaries()
                 .put(dictionary.dictionaryId(), dictionary);
+        for (Word word : dictionary.allWords()) {
+            InMemoryObject.instance()
+                    .words()
+                    .put(word.wordId(), word);
+        }
+    }
+
+    @Override
+    public Collection<Dictionary> getAllDictionaries() {
+        return InMemoryObject
+                .instance()
+                .dictionaries()
+                .values();
     }
 
 }

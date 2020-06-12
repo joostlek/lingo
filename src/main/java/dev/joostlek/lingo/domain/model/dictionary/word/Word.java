@@ -8,14 +8,16 @@ import java.util.Objects;
 
 public class Word extends Entity {
 
+    private WordId wordId;
     private DictionaryId dictionaryId;
     private String word;
 
-    public Word(DictionaryId dictionaryId, String word) {
+    public Word(WordId wordId, DictionaryId dictionaryId, String word) {
         this();
 
         this.setDictionaryId(dictionaryId);
         this.setWord(word);
+        this.setWordId(wordId);
 
         DomainEventPublisher
                 .instance()
@@ -26,6 +28,10 @@ public class Word extends Entity {
 
     private Word() {
         super();
+    }
+
+    public WordId wordId() {
+        return wordId;
     }
 
     public DictionaryId dictionaryId() {
@@ -40,6 +46,12 @@ public class Word extends Entity {
         assertArgumentNotNull(dictionaryId, "De dictionaryId moet meegegeven worden.");
 
         this.dictionaryId = dictionaryId;
+    }
+
+    public void setWordId(WordId wordId) {
+        assertArgumentNotNull(wordId, "De dictionaryId moet meegegeven worden.");
+
+        this.wordId = wordId;
     }
 
     public void setWord(String word) {

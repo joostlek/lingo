@@ -3,8 +3,7 @@ package dev.joostlek.lingo.infrastructure.web.dto;
 import lombok.Data;
 
 @Data
-public class WordDTO {
+public class DictionaryDto {
     private String dictionaryId;
-
-    private String word;
+    private String language;
 }

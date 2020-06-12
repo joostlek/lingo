@@ -3,6 +3,7 @@ package dev.joostlek.lingo.infrastructure.persistency.memory;
 import dev.joostlek.lingo.domain.model.game.Game;
 import dev.joostlek.lingo.domain.model.game.GameId;
 import dev.joostlek.lingo.domain.model.game.GameRepository;
+import dev.joostlek.lingo.domain.model.game.round.Round;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -39,5 +40,11 @@ public class InMemoryGameRepository implements GameRepository {
         InMemoryObject.instance()
                 .games()
                 .put(game.gameId(), game);
+        for (Round round : game.rounds()) {
+            InMemoryObject
+                    .instance()
+                    .rounds()
+                    .put(round.roundId(), round);
+        }
     }
 }

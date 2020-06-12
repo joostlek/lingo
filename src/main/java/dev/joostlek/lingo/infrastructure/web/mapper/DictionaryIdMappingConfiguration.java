@@ -4,9 +4,7 @@ import dev.joostlek.lingo.domain.model.dictionary.DictionaryId;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
 public class DictionaryIdMappingConfiguration implements MapperConfiguration {
     @Override
     public void execute(ModelMapper modelMapper) {
