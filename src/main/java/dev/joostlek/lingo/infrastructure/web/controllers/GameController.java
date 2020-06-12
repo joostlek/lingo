@@ -6,11 +6,15 @@ import dev.joostlek.lingo.domain.model.game.Game;
 import dev.joostlek.lingo.infrastructure.web.dto.GameDto;
 import dev.joostlek.lingo.infrastructure.web.requests.CreateGameRequest;
 import dev.joostlek.lingo.infrastructure.web.util.BaseUrl;
+import dev.joostlek.lingo.infrastructure.web.util.Response;
+import dev.joostlek.lingo.infrastructure.web.util.ResponseBuilder;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping(BaseUrl.V1_API + "/games")
@@ -29,9 +33,27 @@ public class GameController {
     }
 
     @PostMapping
-    public GameDto createGame(@RequestBody CreateGameRequest createGameRequest) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Response<GameDto> createGame(@RequestBody CreateGameRequest createGameRequest) {
         String gameId = gameService.createGame(createGameRequest.getWordLength(), createGameRequest.getChosenDictionaryId());
         Game game = gameQueryService.getGameByGameId(gameId);
-        return modelMapper.map(game, GameDto.class);
+        GameDto gameDto = modelMapper.map(game, GameDto.class);
+        return ResponseBuilder.created()
+                .data(gameDto)
+                .build();
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Response<Set<GameDto>> getAllGames() {
+        Collection<Game> games = gameQueryService.getAllGames();
+        Set<GameDto> gameSet = new HashSet<>();
+        for (Game game : games) {
+            GameDto gameDto = modelMapper.map(game, GameDto.class);
+            gameSet.add(gameDto);
+        }
+        return ResponseBuilder.ok()
+                .data(gameSet)
+                .build();
     }
 }

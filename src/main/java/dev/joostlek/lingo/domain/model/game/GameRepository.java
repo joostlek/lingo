@@ -1,5 +1,6 @@
 package dev.joostlek.lingo.domain.model.game;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface GameRepository {
@@ -8,4 +9,6 @@ public interface GameRepository {
     GameId nextIdentity();
 
     void save(Game game);
+
+    Collection<Game> getAllGames();
 }
