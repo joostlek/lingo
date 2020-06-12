@@ -5,6 +5,7 @@ import dev.joostlek.lingo.domain.model.game.GameId;
 import dev.joostlek.lingo.domain.model.game.GameRepository;
 import dev.joostlek.lingo.domain.model.game.round.Round;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,5 +47,13 @@ public class InMemoryGameRepository implements GameRepository {
                     .rounds()
                     .put(round.roundId(), round);
         }
+    }
+
+    @Override
+    public Collection<Game> getAllGames() {
+        return InMemoryObject
+                .instance()
+                .games()
+                .values();
     }
 }
