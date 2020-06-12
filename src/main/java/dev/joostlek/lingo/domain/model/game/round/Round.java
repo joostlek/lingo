@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Round extends Entity {
-    public final static int TURNS_PER_ROUND = 5;
+    public static final int TURNS_PER_ROUND = 5;
     private final List<Turn> turns;
     private final Date startedAt;
     private GameId gameId;

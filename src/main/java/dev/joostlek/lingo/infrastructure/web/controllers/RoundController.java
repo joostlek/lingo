@@ -2,7 +2,6 @@ package dev.joostlek.lingo.infrastructure.web.controllers;
 
 import dev.joostlek.lingo.application.game.GameService;
 import dev.joostlek.lingo.application.game.round.RoundQueryService;
-import dev.joostlek.lingo.application.game.round.RoundService;
 import dev.joostlek.lingo.domain.model.game.round.Round;
 import dev.joostlek.lingo.infrastructure.web.dto.RoundDto;
 import dev.joostlek.lingo.infrastructure.web.util.BaseUrl;
@@ -25,13 +24,10 @@ public class RoundController {
 
     private final ModelMapper modelMapper;
 
-    private final RoundService roundService;
-
-    public RoundController(RoundQueryService roundQueryService, ModelMapper modelMapper, GameService gameService, RoundService roundService) {
+    public RoundController(RoundQueryService roundQueryService, ModelMapper modelMapper, GameService gameService) {
         this.roundQueryService = roundQueryService;
         this.modelMapper = modelMapper;
         this.gameService = gameService;
-        this.roundService = roundService;
     }
 
     @GetMapping

@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Turn extends Entity {
-    public final static int SECONDS_PER_TURN = 10;
+    public static final int SECONDS_PER_TURN = 10;
     private final Date endedAt;
     private TurnId turnId;
     private RoundId roundId;
@@ -24,47 +24,45 @@ public class Turn extends Entity {
     }
 
     public void validate(String guess, String answer) {
-        Set<Result> results = new HashSet<>();
+        Set<Result> conclusion = new HashSet<>();
 
         char[] answerChars = answer.toCharArray();
         char[] guessChars = guess.toCharArray();
         if (answer.length() != guess.length() || (endedAt().getTime() - startedAt().getTime()) / 1000 > SECONDS_PER_TURN) {
             for (int i = 0; i < answerChars.length; i++) {
-                results.add(Result.invalid(guessChars[i], i));
+                conclusion.add(Result.invalid(guessChars[i], i));
             }
         } else {
             for (int i = 0; i < answerChars.length; i++) {
                 if (answerChars[i] == guessChars[i]) {
-                    results.add(Result.correct(guessChars[i], i));
+                    conclusion.add(Result.correct(guessChars[i], i));
                     answerChars[i] = '0';
                     guessChars[i] = '0';
                 }
             }
-            if (results.size() == answer.length()) {
+            if (conclusion.size() == answer.length()) {
                 DomainEventPublisher.instance()
                         .publish(new WordIsCorrect(this.roundId(), this.turnId()));
             } else {
                 for (int i1 = 0; i1 < guessChars.length; i1++) {
                     if (guessChars[i1] != '0') {
                         for (int i = 0; i < answerChars.length; i++) {
-                            if (answerChars[i] != '0') {
-                                if (answerChars[i] == guessChars[i1]) {
-                                    results.add(Result.present(guessChars[i1], i));
-                                    answerChars[i] = '0';
-                                    guessChars[i1] = '0';
-                                }
+                            if (answerChars[i] != '0' && answerChars[i] == guessChars[i1]) {
+                                conclusion.add(Result.present(guessChars[i1], i));
+                                answerChars[i] = '0';
+                                guessChars[i1] = '0';
                             }
                         }
                     }
                 }
                 for (int i = 0; i < guessChars.length; i++) {
                     if (guessChars[i] != '0') {
-                        results.add(Result.absent(guessChars[i], i));
+                        conclusion.add(Result.absent(guessChars[i], i));
                     }
                 }
             }
         }
-        this.setResults(results);
+        this.setResults(conclusion);
     }
 
     public TurnId turnId() {

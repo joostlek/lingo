@@ -57,6 +57,7 @@ public class ResponseBuilder<T> {
         return this;
     }
 
+    @SuppressWarnings("unchecked")
     public <D> Response<D> build() {
         return new Response<>(status, (D) data, error);
     }

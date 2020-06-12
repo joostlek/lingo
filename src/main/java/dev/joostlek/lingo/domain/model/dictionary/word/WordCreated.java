@@ -23,6 +23,18 @@ public class WordCreated implements DomainEvent {
         this.eventVersion = 1;
     }
 
+    public DictionaryId dictionaryId() {
+        return dictionaryId;
+    }
+
+    public String word() {
+        return word;
+    }
+
+    public Date occuredOn() {
+        return occuredOn;
+    }
+
     @Override
     public int eventVersion() {
         return this.eventVersion;

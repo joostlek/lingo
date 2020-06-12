@@ -18,7 +18,7 @@ public class Game extends Entity {
 
     private Date createdAt;
 
-    private final static int ROUNDS_PER_GAME = 5;
+    private static final int ROUNDS_PER_GAME = 5;
 
     private WordLength wordLength;
 
