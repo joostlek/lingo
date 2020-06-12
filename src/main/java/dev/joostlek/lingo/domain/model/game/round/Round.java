@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static dev.joostlek.lingo.domain.model.game.Game.ROUNDS_PER_GAME;
+
 public class Round extends Entity {
     public static final int TURNS_PER_ROUND = 5;
     private final List<Turn> turns;
@@ -53,24 +55,28 @@ public class Round extends Entity {
 
     public String getWord() {
         if (this.endedAt == null) {
-            char[] word = new char[answer().word().length()];
-            word[0] = answer().word().charAt(0);
-            for (Turn turn : turns()) {
-                for (Result result : turn.results()) {
-                    if (result.feedback() == Feedback.CORRECT) {
-                        word[result.position()] = result.character();
-                    }
-                }
-            }
-            for (int i = 0; i < word.length; i++) {
-                if (word[i] == 0) {
-                    word[i] = ' ';
-                }
-            }
-            return new String(word);
+            return this.getWordFromTurns();
         } else {
             return this.answer().word();
         }
+    }
+
+    private String getWordFromTurns() {
+        char[] word = new char[answer().word().length()];
+        word[0] = answer().word().charAt(0);
+        for (Turn turn : turns()) {
+            for (Result result : turn.results()) {
+                if (result.feedback() == Feedback.CORRECT) {
+                    word[result.position()] = result.character();
+                }
+            }
+        }
+        for (int i = 0; i < word.length; i++) {
+            if (word[i] == 0) {
+                word[i] = ' ';
+            }
+        }
+        return new String(word);
     }
 
     private Date getLastEndDate() {
@@ -128,25 +134,26 @@ public class Round extends Entity {
     }
 
     public void setGameId(GameId gameId) {
-        assertArgumentNotNull(gameId, "De dictionary moet worden meegegeven.");
+        assertArgumentNotNull(gameId, "The game id must be given.");
 
         this.gameId = gameId;
     }
 
     public void setRoundId(RoundId roundId) {
-        assertArgumentNotNull(roundId, "De dictionary moet worden meegegeven.");
+        assertArgumentNotNull(roundId, "The round id must be given.");
 
         this.roundId = roundId;
     }
 
     public void setAnswer(Word answer) {
-        assertArgumentNotNull(answer, "De dictionary moet worden meegegeven.");
+        assertArgumentNotNull(answer, "The answer must be given.");
 
         this.answer = answer;
     }
 
     public void setCount(int count) {
-        assertArgumentNotNull(count, "De dictionary moet worden meegegeven.");
+        assertArgumentNotNull(count, "The round count must be given");
+        assertArgumentRange(count, 0, ROUNDS_PER_GAME, String.format("Round count must be in between 0 - %d", ROUNDS_PER_GAME));
 
         this.count = count;
     }

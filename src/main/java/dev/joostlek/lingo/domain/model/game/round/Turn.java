@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import static dev.joostlek.lingo.domain.model.game.round.Round.TURNS_PER_ROUND;
+
 public class Turn extends Entity {
     public static final int SECONDS_PER_TURN = 10;
     private final Date endedAt;
@@ -90,25 +92,26 @@ public class Turn extends Entity {
     }
 
     public void setTurnId(TurnId turnId) {
-        assertArgumentNotNull(turnId, "De dictionary moet worden meegegeven.");
+        assertArgumentNotNull(turnId, "The turn id must be given.");
 
         this.turnId = turnId;
     }
 
     public void setRoundId(RoundId roundId) {
-        assertArgumentNotNull(roundId, "De dictionary moet worden meegegeven.");
+        assertArgumentNotNull(roundId, "The round id must be given.");
 
         this.roundId = roundId;
     }
 
     public void setCount(int count) {
-        assertArgumentNotNull(count, "De dictionary moet worden meegegeven.");
+        assertArgumentNotNull(count, "The turn count must be given.");
+        assertArgumentRange(count, 0, TURNS_PER_ROUND, String.format("Turn count must be in between 0 - %d", TURNS_PER_ROUND));
 
         this.count = count;
     }
 
     public void setStartedAt(Date startedAt) {
-        assertArgumentNotNull(startedAt, "De dictionary moet worden meegegeven.");
+        assertArgumentNotNull(startedAt, "The start date must be given.");
 
         this.startedAt = startedAt;
     }
