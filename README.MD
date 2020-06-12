@@ -11,7 +11,7 @@
 
 Lingo is a word guessing game powered by Spring boot.
 
-## 🚀 Setup
+## 🚀  Setup
 
 1. Clone this repo with `git clone https://github.com/joostlek/lingo`.
 2. If you're using Windows do `gradlew.bat clean bootRun` and if you're on a UNIX based system then do `./gradlew clean bootRun`
