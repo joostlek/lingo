@@ -14,4 +14,18 @@ Lingo is a word guessing game powered by Spring boot.
 ## 🚀  Setup
 
 1. Clone this repo with `git clone https://github.com/joostlek/lingo`.
-2. If you're using Windows do `gradlew.bat clean bootRun` and if you're on a UNIX based system then do `./gradlew clean bootRun`
+2. Set the environment variables as displayed below.
+3. If you're using Windows do `gradlew.bat clean bootRun` and if you're on a UNIX based system then do `./gradlew clean bootRun`
+
+## 📚 Documentation
+
+API documentation is available [here](https://documenter.getpostman.com/view/2998810/SzzheJhN).
+
+## 🔢 Environment variables
+
+| Variable  | Required | Desciption                                  | Example value                            |
+|-----------|----------|---------------------------------------------|------------------------------------------|
+| `DB_URL`  | True     | The database url to connect to.             | `jdbc:postgresql://localhost:5423/lingo` |
+| `DB_USER` | True     | The user used to login on the database.     | `postgres`                               |
+| `DB_PASS` | True     | The password used to login on the database. | `hunter2`                                |
+| `PORT`    | False    | The port lingo will run on. (default: 8080) | `8080`                                |
