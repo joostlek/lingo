@@ -13,13 +13,17 @@ import static dev.joostlek.lingo.domain.model.game.Game.ROUNDS_PER_GAME;
 public class Round extends Entity {
     public static final int TURNS_PER_ROUND = 5;
     private final List<Turn> turns;
-    private final Date startedAt;
+    private Date startedAt;
     private GameId gameId;
     private RoundId roundId;
     private Date endedAt;
     private Word answer;
     private int count;
     private boolean guessed;
+
+    public Round() {
+        this.turns = new ArrayList<>();
+    }
 
     public Round(GameId gameId, RoundId roundId, Word answer, int count) {
         this.setGameId(gameId);
@@ -156,5 +160,17 @@ public class Round extends Entity {
         assertArgumentRange(count, 0, ROUNDS_PER_GAME, String.format("Round count must be in between 0 - %d", ROUNDS_PER_GAME));
 
         this.count = count;
+    }
+
+    public void setStartedAt(Date startedAt) {
+        this.startedAt = startedAt;
+    }
+
+    public void setEndedAt(Date endedAt) {
+        this.endedAt = endedAt;
+    }
+
+    public void setGuessed(boolean guessed) {
+        this.guessed = guessed;
     }
 }

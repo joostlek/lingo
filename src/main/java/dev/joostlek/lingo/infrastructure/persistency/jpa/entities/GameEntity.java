@@ -27,6 +27,6 @@ public class GameEntity {
     @ManyToOne
     private DictionaryEntity dictionary;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game", cascade = {CascadeType.ALL})
     private Set<RoundEntity> rounds;
 }

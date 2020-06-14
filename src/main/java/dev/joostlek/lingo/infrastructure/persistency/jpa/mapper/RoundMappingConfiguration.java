@@ -14,6 +14,7 @@ public class RoundMappingConfiguration implements MapperConfiguration {
                 .addMapping(Round::count, RoundEntity::setCount)
                 .addMapping(Round::guessed, RoundEntity::setGuessed)
                 .addMapping(Round::answer, RoundEntity::setAnswer)
-                .addMapping(Round::turns, RoundEntity::setTurns);
+                .addMapping(Round::turns, RoundEntity::setTurns)
+                .addMapping(Round::roundId, RoundEntity::setId);
     }
 }

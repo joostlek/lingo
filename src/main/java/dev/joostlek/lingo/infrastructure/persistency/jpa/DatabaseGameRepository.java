@@ -47,6 +47,9 @@ public class DatabaseGameRepository implements GameRepository {
     public void save(Game aGame) {
         GameEntity game = modelMapper.map(aGame, GameEntity.class);
         game.setDictionary(entityManager.getReference(DictionaryEntity.class, Long.parseLong(aGame.chosenDictionaryId().id())));
+        game.getRounds().forEach(roundEntity -> {
+            roundEntity.setGame(game);
+        });
         this.gameJpaRepository.save(game);
     }
 

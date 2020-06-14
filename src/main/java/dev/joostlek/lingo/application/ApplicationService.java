@@ -15,7 +15,6 @@ import dev.joostlek.lingo.domain.model.dictionary.word.WordRepository;
 import dev.joostlek.lingo.domain.model.game.GameRepository;
 import dev.joostlek.lingo.domain.model.game.round.RoundRepository;
 import dev.joostlek.lingo.domain.model.game.round.TurnRepository;
-import dev.joostlek.lingo.infrastructure.persistency.memory.InMemoryRoundRepository;
 import dev.joostlek.lingo.infrastructure.persistency.memory.InMemoryTurnRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
@@ -33,12 +32,12 @@ public class ApplicationService {
 
     private final TurnRepository turnRepository;
 
-    public ApplicationService(DictionaryRepository dictionaryRepository, WordRepository wordRepository, GameRepository gameRepository) {
+    public ApplicationService(DictionaryRepository dictionaryRepository, WordRepository wordRepository, GameRepository gameRepository, RoundRepository roundRepository) {
         this.gameRepository = gameRepository;
-        this.roundRepository = new InMemoryRoundRepository();
-        this.turnRepository = new InMemoryTurnRepository();
         this.dictionaryRepository = dictionaryRepository;
         this.wordRepository = wordRepository;
+        this.roundRepository = roundRepository;
+        this.turnRepository = new InMemoryTurnRepository();
     }
 
     @Bean
