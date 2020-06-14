@@ -7,13 +7,11 @@ import dev.joostlek.lingo.domain.model.dictionary.word.WordRepository;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.WordEntity;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.repositories.WordJpaRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
 public class DatabaseWordRepository implements WordRepository {
 
     private final ModelMapper modelMapper;

@@ -8,14 +8,12 @@ import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.GameEntity;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.ResultId;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.repositories.GameJpaRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
 public class DatabaseGameRepository implements GameRepository {
 
     private final GameJpaRepository gameJpaRepository;

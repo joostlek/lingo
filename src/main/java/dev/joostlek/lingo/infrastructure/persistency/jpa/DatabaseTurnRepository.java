@@ -6,11 +6,9 @@ import dev.joostlek.lingo.domain.model.game.round.TurnRepository;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.TurnEntity;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.repositories.TurnJpaRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public class DatabaseTurnRepository implements TurnRepository {
 
     private final TurnJpaRepository turnJpaRepository;

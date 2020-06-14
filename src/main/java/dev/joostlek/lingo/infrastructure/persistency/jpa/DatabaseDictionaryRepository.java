@@ -7,12 +7,10 @@ import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.DictionaryEnti
 import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.WordEntity;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.repositories.DictionaryJpaRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-@Repository
 public class DatabaseDictionaryRepository implements DictionaryRepository {
 
     private final DictionaryJpaRepository dictionaryJpaRepository;

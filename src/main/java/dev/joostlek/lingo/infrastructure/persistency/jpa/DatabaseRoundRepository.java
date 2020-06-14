@@ -9,7 +9,6 @@ import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.ResultId;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.RoundEntity;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.repositories.RoundJpaRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.Collection;
@@ -17,7 +16,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Repository
 public class DatabaseRoundRepository implements RoundRepository {
 
     private final RoundJpaRepository roundJpaRepository;
