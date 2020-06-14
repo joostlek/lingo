@@ -6,7 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Getter
 @Setter
@@ -14,16 +17,19 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity(name = "result")
 public class ResultEntity {
-    @Id
-    private Long id;
+    @EmbeddedId
+    private ResultId resultId;
 
     private char character;
-
-    private int position;
 
     @Enumerated(EnumType.ORDINAL)
     private Feedback feedback;
 
-    @ManyToOne
-    private TurnEntity turn;
+    public int getPosition() {
+        return this.resultId.getPosition();
+    }
+
+    public void setPosition(int position) {
+        this.resultId = new ResultId(position, null);
+    }
 }

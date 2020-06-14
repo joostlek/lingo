@@ -9,6 +9,7 @@ public class TurnMappingConfiguration implements MapperConfiguration {
     @Override
     public void execute(ModelMapper modelMapper) {
         modelMapper.createTypeMap(Turn.class, TurnEntity.class)
+                .addMapping(Turn::turnId, TurnEntity::setId)
                 .addMapping(Turn::startedAt, TurnEntity::setStartedAt)
                 .addMapping(Turn::endedAt, TurnEntity::setEndedAt)
                 .addMapping(Turn::count, TurnEntity::setCount)

@@ -7,6 +7,9 @@ public class Result {
 
     private Feedback feedback;
 
+    public Result() {
+    }
+
     private Result(char character, int position, Feedback feedback) {
         this.character = character;
         this.position = position;

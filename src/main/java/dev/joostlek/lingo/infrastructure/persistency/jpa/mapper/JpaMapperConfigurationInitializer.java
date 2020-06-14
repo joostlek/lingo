@@ -2,11 +2,15 @@ package dev.joostlek.lingo.infrastructure.persistency.jpa.mapper;
 
 import dev.joostlek.lingo.util.MapperConfiguration;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JpaMapperConfigurationInitializer implements CommandLineRunner {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final ModelMapper modelMapper;
 
@@ -33,5 +37,6 @@ public class JpaMapperConfigurationInitializer implements CommandLineRunner {
         for (MapperConfiguration configuration : mapperConfiguration) {
             configuration.execute(modelMapper);
         }
+        logger.info("JPA mappings applied.");
     }
 }

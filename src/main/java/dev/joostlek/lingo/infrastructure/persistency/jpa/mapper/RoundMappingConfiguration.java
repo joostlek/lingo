@@ -16,5 +16,14 @@ public class RoundMappingConfiguration implements MapperConfiguration {
                 .addMapping(Round::answer, RoundEntity::setAnswer)
                 .addMapping(Round::turns, RoundEntity::setTurns)
                 .addMapping(Round::roundId, RoundEntity::setId);
+
+        modelMapper.createTypeMap(RoundEntity.class, Round.class)
+                .addMapping(RoundEntity::getStartedAt, Round::setStartedAt)
+                .addMapping(RoundEntity::getEndedAt, Round::setEndedAt)
+                .addMapping(RoundEntity::getCount, Round::setCount)
+                .addMapping(RoundEntity::isGuessed, Round::setGuessed)
+                .addMapping(RoundEntity::getAnswer, Round::setAnswer)
+                .addMapping(RoundEntity::getTurns, Round::setTurns)
+                .addMapping(RoundEntity::getId, Round::setRoundId);
     }
 }

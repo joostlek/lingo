@@ -42,6 +42,14 @@ public class RoundApplicationService implements RoundService {
 
         round.performTurn(turnId, guess);
 
+        Round aRound = this.roundRepository().roundOfIdentity(roundId)
+                .orElseThrow(() -> new IllegalStateException("Round not found with id " + aRoundId + "."));
+
+        if (aRound.guessed()) {
+            round.setGuessed(true);
+            round.setEndedAt(aRound.endedAt());
+        }
+
         this.roundRepository().save(round);
 
         return turnId.id();

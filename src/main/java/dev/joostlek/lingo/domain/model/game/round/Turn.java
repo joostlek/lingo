@@ -11,12 +11,15 @@ import static dev.joostlek.lingo.domain.model.game.round.Round.TURNS_PER_ROUND;
 
 public class Turn extends Entity {
     public static final int SECONDS_PER_TURN = 10;
-    private final Date endedAt;
+    private Date endedAt;
     private TurnId turnId;
     private RoundId roundId;
     private Set<Result> results;
     private Date startedAt;
     private int count;
+
+    public Turn() {
+    }
 
     public Turn(TurnId turnId, RoundId roundId, int count) {
         this.setTurnId(turnId);
@@ -120,5 +123,9 @@ public class Turn extends Entity {
         assertArgumentNotNull(results, "The results may not be empty.");
 
         this.results = results;
+    }
+
+    public void setEndedAt(Date endedAt) {
+        this.endedAt = endedAt;
     }
 }

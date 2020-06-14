@@ -12,7 +12,7 @@ import static dev.joostlek.lingo.domain.model.game.Game.ROUNDS_PER_GAME;
 
 public class Round extends Entity {
     public static final int TURNS_PER_ROUND = 5;
-    private final List<Turn> turns;
+    private List<Turn> turns;
     private Date startedAt;
     private GameId gameId;
     private RoundId roundId;
@@ -172,5 +172,9 @@ public class Round extends Entity {
 
     public void setGuessed(boolean guessed) {
         this.guessed = guessed;
+    }
+
+    public void setTurns(List<Turn> turns) {
+        this.turns = turns;
     }
 }

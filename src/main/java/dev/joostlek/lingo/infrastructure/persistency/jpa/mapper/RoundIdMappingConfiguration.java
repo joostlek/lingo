@@ -17,5 +17,14 @@ public class RoundIdMappingConfiguration implements MapperConfiguration {
         };
 
         modelMapper.addConverter(wordIdConverter);
+
+        Converter<Long, RoundId> longConverter = new AbstractConverter<>() {
+            @Override
+            protected RoundId convert(Long source) {
+                return new RoundId(String.valueOf(source));
+            }
+        };
+
+        modelMapper.addConverter(longConverter);
     }
 }

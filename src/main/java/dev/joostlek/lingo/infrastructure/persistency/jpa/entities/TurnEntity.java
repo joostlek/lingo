@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -30,6 +27,6 @@ public class TurnEntity {
     @ManyToOne
     private RoundEntity round;
 
-    @OneToMany(mappedBy = "turn")
+    @OneToMany(mappedBy = "resultId.turn", cascade = CascadeType.ALL)
     private Set<ResultEntity> results;
 }

@@ -5,6 +5,7 @@ import dev.joostlek.lingo.domain.model.game.GameId;
 import dev.joostlek.lingo.domain.model.game.GameRepository;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.DictionaryEntity;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.GameEntity;
+import dev.joostlek.lingo.infrastructure.persistency.jpa.entities.ResultId;
 import dev.joostlek.lingo.infrastructure.persistency.jpa.repositories.GameJpaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
@@ -49,6 +50,10 @@ public class DatabaseGameRepository implements GameRepository {
         game.setDictionary(entityManager.getReference(DictionaryEntity.class, Long.parseLong(aGame.chosenDictionaryId().id())));
         game.getRounds().forEach(roundEntity -> {
             roundEntity.setGame(game);
+            roundEntity.getTurns().forEach(turnEntity -> {
+                turnEntity.setRound(roundEntity);
+                turnEntity.getResults().forEach(resultEntity -> resultEntity.setResultId(new ResultId(resultEntity.getResultId().getPosition(), turnEntity)));
+            });
         });
         this.gameJpaRepository.save(game);
     }
