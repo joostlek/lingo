@@ -23,9 +23,10 @@ API documentation is available [here](https://documenter.getpostman.com/view/299
 
 ## 🔢 Environment variables
 
-| Variable  | Required | Desciption                                  | Example value                            |
-|-----------|----------|---------------------------------------------|------------------------------------------|
-| `DB_URL`  | True     | The database url to connect to.             | `jdbc:postgresql://localhost:5423/lingo` |
-| `DB_USER` | True     | The user used to login on the database.     | `postgres`                               |
-| `DB_PASS` | True     | The password used to login on the database. | `hunter2`                                |
-| `PORT`    | False    | The port lingo will run on. (default: 8080) | `8080`                                |
+| Variable       | Required | Description                                 | Example value                            |
+|----------------|----------|---------------------------------------------|------------------------------------------|
+| `DB_URL`       | True     | The database url to connect to.             | `jdbc:postgresql://localhost:5423/lingo` |
+| `DB_USER`      | True     | The user used to login on the database.     | `postgres`                               |
+| `DB_PASS`      | True     | The password used to login on the database. | `hunter2`                                |
+| `PORT`         | False    | The port lingo will run on. (default: 8080) | `8080`                                   |
+| `STORAGE_TYPE` | False    | The type of storage lingo will use.         | `IN_MEMORY` (default) / `DATABASE`       |
