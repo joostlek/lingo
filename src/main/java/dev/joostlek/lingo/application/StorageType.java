@@ -1,7 +1,7 @@
 package dev.joostlek.lingo.application;
 
 public enum StorageType {
-    IN_MEMORY("inMemory"),
+    IN_MEMORY("memory"),
     DATABASE("database");
 
     private final String beanName;
