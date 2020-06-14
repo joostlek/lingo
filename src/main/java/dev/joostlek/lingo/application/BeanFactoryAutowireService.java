@@ -23,8 +23,8 @@ public class BeanFactoryAutowireService {
     private final ApplicationContext applicationContext;
 
     public BeanFactoryAutowireService(ApplicationContext applicationContext) {
-        if (System.getenv().containsKey("storage_type")) {
-            storageType = StorageType.valueOf(System.getenv("storage_type"));
+        if (System.getenv().containsKey("STORAGE_TYPE")) {
+            storageType = StorageType.valueOf(System.getenv("STORAGE_TYPE"));
         } else {
             storageType = StorageType.IN_MEMORY;
         }
