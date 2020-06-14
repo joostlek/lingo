@@ -2,6 +2,7 @@ package dev.joostlek.lingo.infrastructure.web.mapper;
 
 import dev.joostlek.lingo.domain.model.dictionary.word.Word;
 import dev.joostlek.lingo.infrastructure.web.dto.WordDto;
+import dev.joostlek.lingo.util.MapperConfiguration;
 import org.modelmapper.ModelMapper;
 
 public class WordMappingConfiguration implements MapperConfiguration {

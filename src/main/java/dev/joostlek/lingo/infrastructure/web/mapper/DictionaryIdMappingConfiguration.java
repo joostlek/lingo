@@ -1,6 +1,7 @@
 package dev.joostlek.lingo.infrastructure.web.mapper;
 
 import dev.joostlek.lingo.domain.model.dictionary.DictionaryId;
+import dev.joostlek.lingo.util.MapperConfiguration;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;

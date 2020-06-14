@@ -1,5 +1,6 @@
 package dev.joostlek.lingo.infrastructure.web.mapper;
 
+import dev.joostlek.lingo.util.MapperConfiguration;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;

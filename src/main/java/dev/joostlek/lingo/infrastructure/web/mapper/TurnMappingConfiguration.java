@@ -2,6 +2,7 @@ package dev.joostlek.lingo.infrastructure.web.mapper;
 
 import dev.joostlek.lingo.domain.model.game.round.Turn;
 import dev.joostlek.lingo.infrastructure.web.dto.TurnDto;
+import dev.joostlek.lingo.util.MapperConfiguration;
 import org.modelmapper.ModelMapper;
 
 public class TurnMappingConfiguration implements MapperConfiguration {
