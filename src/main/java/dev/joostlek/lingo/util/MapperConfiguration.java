@@ -1,4 +1,4 @@
-package dev.joostlek.lingo.infrastructure.web.mapper;
+package dev.joostlek.lingo.util;
 
 import org.modelmapper.ModelMapper;
 

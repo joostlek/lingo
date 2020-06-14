@@ -2,6 +2,7 @@ package dev.joostlek.lingo.infrastructure.web.mapper;
 
 import dev.joostlek.lingo.domain.model.game.round.Round;
 import dev.joostlek.lingo.infrastructure.web.dto.RoundDto;
+import dev.joostlek.lingo.util.MapperConfiguration;
 import org.modelmapper.ModelMapper;
 
 public class RoundMappingConfiguration implements MapperConfiguration {
