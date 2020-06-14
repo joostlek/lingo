@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 @Service
 public class BeanFactoryAutowireService {
@@ -46,7 +46,7 @@ public class BeanFactoryAutowireService {
     public WordRepository wordRepository() {
         switch (storageType) {
             case DATABASE:
-                return new DatabaseWordRepository((ModelMapper) applicationContext.getBean("modelMapper"), (WordJpaRepository) applicationContext.getBean("WordJpaRepository"));
+                return new DatabaseWordRepository((ModelMapper) applicationContext.getBean("modelMapper"), (WordJpaRepository) applicationContext.getBean("wordJpaRepository"));
             case IN_MEMORY:
             default:
                 return new InMemoryWordRepository();
@@ -57,7 +57,7 @@ public class BeanFactoryAutowireService {
     public GameRepository gameRepository() {
         switch (storageType) {
             case DATABASE:
-                return new DatabaseGameRepository((GameJpaRepository) applicationContext.getBean("gameJpaRepository"), (ModelMapper) applicationContext.getBean("modelMapper"), (EntityManager) applicationContext.getBean("entityManager"));
+                return new DatabaseGameRepository((GameJpaRepository) applicationContext.getBean("gameJpaRepository"), (ModelMapper) applicationContext.getBean("modelMapper"), ((EntityManagerFactory) applicationContext.getBean("entityManagerFactory")).createEntityManager());
             case IN_MEMORY:
             default:
                 return new InMemoryGameRepository();
@@ -68,7 +68,7 @@ public class BeanFactoryAutowireService {
     public RoundRepository roundRepository() {
         switch (storageType) {
             case DATABASE:
-                return new DatabaseRoundRepository((RoundJpaRepository) applicationContext.getBean("roundJpaRepository"), (ModelMapper) applicationContext.getBean("modelMapper"), (EntityManager) applicationContext.getBean("entityManager"));
+                return new DatabaseRoundRepository((RoundJpaRepository) applicationContext.getBean("roundJpaRepository"), (ModelMapper) applicationContext.getBean("modelMapper"), ((EntityManagerFactory) applicationContext.getBean("entityManagerFactory")).createEntityManager());
             case IN_MEMORY:
             default:
                 return new InMemoryRoundRepository();
