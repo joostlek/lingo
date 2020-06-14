@@ -1,5 +1,6 @@
 ![Lingo logo](logo.svg)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0846b90923e4afcab07b5c3072a8477)](https://app.codacy.com/manual/joostlek/lingo?utm_source=github.com&utm_medium=referral&utm_content=joostlek/lingo&utm_campaign=Badge_Grade_Dashboard)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=joostlek_lingo&metric=bugs)](https://sonarcloud.io/dashboard?id=joostlek_lingo)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=joostlek_lingo&metric=code_smells)](https://sonarcloud.io/dashboard?id=joostlek_lingo)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=joostlek_lingo&metric=coverage)](https://sonarcloud.io/dashboard?id=joostlek_lingo)
