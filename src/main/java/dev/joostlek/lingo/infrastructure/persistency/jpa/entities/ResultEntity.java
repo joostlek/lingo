@@ -1,11 +1,17 @@
 package dev.joostlek.lingo.infrastructure.persistency.jpa.entities;
 
 import dev.joostlek.lingo.domain.model.game.round.Feedback;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "result")
 public class ResultEntity {
     @Id

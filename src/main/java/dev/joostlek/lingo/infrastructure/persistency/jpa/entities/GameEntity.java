@@ -1,13 +1,19 @@
 package dev.joostlek.lingo.infrastructure.persistency.jpa.entities;
 
 import dev.joostlek.lingo.domain.model.WordLength;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "game")
 public class GameEntity {
     @Id

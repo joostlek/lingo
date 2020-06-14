@@ -10,46 +10,50 @@ import dev.joostlek.lingo.application.game.round.RoundApplicationService;
 import dev.joostlek.lingo.application.game.round.RoundQueryService;
 import dev.joostlek.lingo.application.game.round.RoundService;
 import dev.joostlek.lingo.application.game.round.turn.TurnQueryService;
+import dev.joostlek.lingo.domain.model.dictionary.DictionaryRepository;
+import dev.joostlek.lingo.domain.model.dictionary.word.WordRepository;
+import dev.joostlek.lingo.domain.model.game.GameRepository;
 import dev.joostlek.lingo.domain.model.game.round.RoundRepository;
 import dev.joostlek.lingo.domain.model.game.round.TurnRepository;
-import dev.joostlek.lingo.infrastructure.persistency.memory.*;
+import dev.joostlek.lingo.infrastructure.persistency.memory.InMemoryRoundRepository;
+import dev.joostlek.lingo.infrastructure.persistency.memory.InMemoryTurnRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ApplicationService {
 
-    private final InMemoryDictionaryRepository inMemoryDictionaryRepository;
+    private final DictionaryRepository dictionaryRepository;
 
-    private final InMemoryWordRepository inMemoryWordRepository;
+    private final WordRepository wordRepository;
 
-    private final InMemoryGameRepository inMemoryGameRepository;
+    private final GameRepository gameRepository;
 
     private final RoundRepository roundRepository;
 
     private final TurnRepository turnRepository;
 
-    public ApplicationService() {
-        this.inMemoryDictionaryRepository = new InMemoryDictionaryRepository();
-        this.inMemoryWordRepository = new InMemoryWordRepository();
-        this.inMemoryGameRepository = new InMemoryGameRepository();
+    public ApplicationService(DictionaryRepository dictionaryRepository, WordRepository wordRepository, GameRepository gameRepository) {
+        this.gameRepository = gameRepository;
         this.roundRepository = new InMemoryRoundRepository();
         this.turnRepository = new InMemoryTurnRepository();
+        this.dictionaryRepository = dictionaryRepository;
+        this.wordRepository = wordRepository;
     }
 
     @Bean
     public DictionaryService dictionaryService() {
-        return new DictionaryApplicationService(inMemoryDictionaryRepository, inMemoryWordRepository);
+        return new DictionaryApplicationService(dictionaryRepository, wordRepository);
     }
 
     @Bean
     public GameService gameService() {
-        return new GameApplicationService(inMemoryGameRepository, inMemoryDictionaryRepository, roundRepository);
+        return new GameApplicationService(gameRepository, dictionaryRepository, roundRepository);
     }
 
     @Bean
     public GameQueryService gameQueryService() {
-        return new GameQueryService(inMemoryGameRepository);
+        return new GameQueryService(gameRepository);
     }
 
     @Bean
@@ -64,7 +68,7 @@ public class ApplicationService {
 
     @Bean
     public DictionaryQueryService dictionaryQueryService() {
-        return new DictionaryQueryService(inMemoryDictionaryRepository, inMemoryWordRepository);
+        return new DictionaryQueryService(dictionaryRepository, wordRepository);
     }
 
     @Bean

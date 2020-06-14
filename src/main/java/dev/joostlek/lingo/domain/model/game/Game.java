@@ -25,6 +25,9 @@ public class Game extends Entity {
     private DictionaryId chosenDictionaryId;
     private Set<Round> rounds;
 
+    public Game() {
+    }
+
     public Game(GameId gameId, WordLength wordLength, DictionaryId chosenDictionaryId) {
         super();
 

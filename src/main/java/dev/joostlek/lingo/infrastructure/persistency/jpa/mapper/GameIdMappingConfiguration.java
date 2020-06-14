@@ -17,5 +17,14 @@ public class GameIdMappingConfiguration implements MapperConfiguration {
         };
 
         modelMapper.addConverter(gameIdConverter);
+
+        Converter<Long, GameId> gameIdLongConverter = new AbstractConverter<>() {
+            @Override
+            protected GameId convert(Long source) {
+                return new GameId(String.valueOf(source));
+            }
+        };
+
+        modelMapper.addConverter(gameIdLongConverter);
     }
 }

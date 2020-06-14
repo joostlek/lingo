@@ -17,5 +17,14 @@ public class DictionaryIdMappingConfiguration implements MapperConfiguration {
         };
 
         modelMapper.addConverter(dictionaryIdConverter);
+
+        Converter<Long, DictionaryId> longConverter = new AbstractConverter<>() {
+            @Override
+            protected DictionaryId convert(Long source) {
+                return new DictionaryId(String.valueOf(source));
+            }
+        };
+
+        modelMapper.addConverter(longConverter);
     }
 }
