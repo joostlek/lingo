@@ -2,15 +2,16 @@ package dev.joostlek.lingo.infrastructure.persistency.jpa.entities;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Data
 @Entity(name = "word")
 public class WordEntity {
 
     @Id
-    @SequenceGenerator(name = "word_id_generator", sequenceName = "word_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "word_id_generator")
     private Long id;
 
     private String word;

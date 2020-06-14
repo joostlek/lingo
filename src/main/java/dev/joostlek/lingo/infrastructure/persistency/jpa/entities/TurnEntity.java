@@ -2,7 +2,10 @@ package dev.joostlek.lingo.infrastructure.persistency.jpa.entities;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,8 +13,6 @@ import java.util.Set;
 @Entity(name = "turn")
 public class TurnEntity {
     @Id
-    @SequenceGenerator(name = "turn_id_generator", sequenceName = "turn_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "turn_id_generator")
     private Long id;
 
     private Date endedAt;

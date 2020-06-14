@@ -2,7 +2,9 @@ package dev.joostlek.lingo.infrastructure.persistency.jpa.entities;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Data
@@ -10,8 +12,6 @@ import java.util.Set;
 public class DictionaryEntity {
 
     @Id
-    @SequenceGenerator(name = "dictionary_id_generator", sequenceName = "dictionary_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dictionary_id_generator")
     private Long id;
 
     private String language;
