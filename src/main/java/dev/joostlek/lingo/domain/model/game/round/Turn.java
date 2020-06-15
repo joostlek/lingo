@@ -33,7 +33,7 @@ public class Turn extends Entity {
 
         char[] answerChars = answer.toCharArray();
         char[] guessChars = guess.toCharArray();
-        if (answer.length() != guess.length()) {
+        if (answer.length() != guess.length() || (endedAt().getTime() - startedAt().getTime()) / 1000 > SECONDS_PER_TURN) {
             for (int i = 0; i < answerChars.length; i++) {
                 conclusion.add(Result.invalid(guessChars[i], i));
             }
