@@ -46,6 +46,16 @@ public class RoundController {
                 .build();
     }
 
+    @GetMapping("/{roundId}")
+    @ResponseStatus(HttpStatus.OK)
+    public Response<RoundDto> getRoundById(@PathVariable String gameId, @PathVariable String roundId) {
+        Round round = roundQueryService.getRoundById(roundId);
+        RoundDto roundDto = modelMapper.map(round, RoundDto.class);
+        return ResponseBuilder.ok()
+                .data(roundDto)
+                .build();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Response<RoundDto> startNewRound(@PathVariable String gameId) {
