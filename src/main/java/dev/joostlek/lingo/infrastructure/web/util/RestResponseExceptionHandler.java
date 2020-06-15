@@ -12,21 +12,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.persistence.EntityNotFoundException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.List;
 
 @ControllerAdvice
 public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler {
-
-    @ExceptionHandler(value = {
-            EntityNotFoundException.class
-    })
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> entityNotFound(EntityNotFoundException e, WebRequest request) {
-        return convertToResponseEntity(ResponseBuilder.notFound().error(toErrorDto(e)).build());
-    }
 
     @ExceptionHandler(value = {
             IllegalArgumentException.class,
@@ -34,7 +23,7 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> illegal(Exception e, WebRequest request) {
-        return convertToResponseEntity(ResponseBuilder.badRequest().error(toErrorDto(e)).build());
+        return convertToResponseEntity(ResponseBuilder.badRequest().error(e.getMessage()).build());
     }
 
     @Override
@@ -55,14 +44,5 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
     private ResponseEntity<Object> convertToResponseEntity(Response<?> response) {
         return ResponseEntity.status(response.getStatus())
                 .body(response);
-    }
-
-    private ErrorDto toErrorDto(Exception e) {
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setMessage(e.getMessage());
-        StringWriter sw = new StringWriter();
-        e.printStackTrace(new PrintWriter(sw));
-        errorDto.setStackTrace(sw.toString());
-        return errorDto;
     }
 }
