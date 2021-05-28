@@ -22,7 +22,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.flywaydb:flyway-core")
-    implementation("org.modelmapper:modelmapper:2.3.7")
+    implementation("org.modelmapper:modelmapper:2.4.4")
     testImplementation("io.zonky.test:embedded-database-spring-test:1.5.4")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
